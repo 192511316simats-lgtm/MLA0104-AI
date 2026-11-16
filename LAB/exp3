@@ -1,0 +1,38 @@
+import heapq
+
+graph = {
+    'A': [('B', 1), ('C', 4)],
+    'B': [('D', 2), ('E', 5)],
+    'C': [('F', 3)],
+    'D': [('G', 3)],
+    'E': [('G', 1)],
+    'F': [('G', 2)],
+    'G': []
+}
+
+def ucs(start, goal):
+    pq = [(0, start, [start])]
+    visited = set()
+
+    while pq:
+        cost, node, path = heapq.heappop(pq)
+
+        if node == goal:
+            return path, cost
+
+        if node in visited:
+            continue
+
+        visited.add(node)
+
+        for neighbour, weight in graph[node]:
+            if neighbour not in visited:
+                heapq.heappush(
+                    pq,
+                    (cost + weight, neighbour, path + [neighbour])
+                )
+
+path, cost = ucs('A', 'G')
+
+print("Path:", path)
+print("Total Cost:", cost)
