@@ -1,0 +1,27 @@
+from sklearn.tree import DecisionTreeClassifier
+
+X = [
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1],
+    [1, 1],
+    [0, 0]
+]
+
+y = [
+    "Reject",
+    "Reject",
+    "Reject",
+    "Approve",
+    "Approve",
+    "Reject"
+]
+
+model = DecisionTreeClassifier(random_state=0)
+model.fit(X, y)
+
+prediction = model.predict([[1, 1]])
+
+print("Decision Tree Classification")
+print("Loan Decision:", prediction[0])
