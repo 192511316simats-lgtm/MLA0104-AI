@@ -1,0 +1,39 @@
+from collections import deque
+
+def water_jug():
+    queue = deque([(0, 0, [])])
+    visited = set()
+
+    while queue:
+        a, b, path = queue.popleft()
+
+        if (a, b) in visited:
+            continue
+
+        visited.add((a, b))
+        path = path + [(a, b)]
+
+        if a == 2 or b == 2:
+            return path
+
+        x = min(a, 3 - b)
+        y = min(b, 4 - a)
+
+        states = [
+            (4, b),
+            (a, 3),
+            (0, b),
+            (a, 0),
+            (a - x, b + x),
+            (a + y, b - y)
+        ]
+
+        for state in states:
+            if state not in visited:
+                queue.append((state[0], state[1], path))
+
+result = water_jug()
+
+print("Water Jug Solution:")
+for step in result:
+    print(step)
