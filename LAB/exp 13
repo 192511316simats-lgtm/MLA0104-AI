@@ -1,0 +1,25 @@
+from sklearn.neural_network import MLPClassifier
+
+X = [
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+]
+
+y = [0, 0, 0, 1]
+
+model = MLPClassifier(
+    hidden_layer_sizes=(4,),
+    solver='lbfgs',
+    random_state=1,
+    max_iter=3000
+)
+
+model.fit(X, y)
+
+print("AND Gate Predictions:")
+
+for data in X:
+    result = model.predict([data])
+    print(data, "=", result[0])
